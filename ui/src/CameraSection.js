@@ -5,18 +5,13 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import * as faceapi from 'face-api.js';
-//import { env } from 'face-api.js';
-//import { recognizeFaceExpressions } from 'face-api.js';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import EmotionPredict from './EmotionPredict';
 import Switch from '@material-ui/core/Switch';
-/***********  Config This Addr  ****** */
 
 const serverAddr = 'http://www.hellogalaxy.cn:5000';
-
-/************************************* */
 
 const MEDIA_WIDTH = 640;
 const MEDIA_HEIGHT = 480;
@@ -67,8 +62,6 @@ function resizeCanvasAndResults(dimensions, canvas, results) {
   canvas.width = width;
   canvas.height = height;
 
-  // resize detections (and landmarks) in case displayed image is smaller than
-  // original size
   return faceapi.resizeResults(results, { width, height });
 }
 
@@ -94,15 +87,12 @@ class CameraSection extends Component {
     canvas.height = input.height;
 
     const detections = await faceapi.detectAllFaces(input);
-    //.withFaceLandmarks()
     console.log(detections);
     const detectionsForSize = faceapi.resizeResults(detections, {
       width: input.width,
       height: input.height,
     });
     console.log(detectionsForSize);
-    // draw them into a canvas
-    //faceapi.drawLandmarks
     faceapi.drawDetection(canvas, detectionsForSize, { withScore: true });
   }
 
@@ -114,11 +104,6 @@ class CameraSection extends Component {
     //load models
     await faceapi.nets.ssdMobilenetv1.load('/models');
     await faceapi.loadTinyFaceDetectorModel('/models');
-    //await faceapi.loadMtcnnModel('/models')
-    //await faceapi.loadFaceLandmarkModel('/models')
-    //await faceapi.loadFaceLandmarkTinyModel('/models')
-    //await faceapi.loadFaceRecognitionModel('/models')
-    //await faceapi.loadFaceExpressionModel('/models')
     console.log('models load succ');
     //init web camera
     await this.onPlay(video);
@@ -129,9 +114,6 @@ class CameraSection extends Component {
   updateTimeStats(timeInMs) {
     let forwardTimes = this.state.forwardTimes;
     forwardTimes = [timeInMs].concat(forwardTimes).slice(0, 30);
-    //const avgTimeInMs = forwardTimes.reduce((total, t) => total + t) / forwardTimes.length
-    //$('#time').val(`${Math.round(avgTimeInMs)} ms`)
-    //$('#fps').val(`${faceapi.round(1000 / avgTimeInMs)}`)
     this.setState({ forwardTimes: forwardTimes });
   }
 
@@ -251,7 +233,6 @@ class CameraSection extends Component {
         let splited = context.getImageData(0, 0, 100, 100);
 
         if (!this.state.localMode) {
-          //console.log('post',splited)
           axios({
             method: 'post',
             url: serverAddr + '/face_img',

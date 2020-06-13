@@ -43,12 +43,6 @@ class App extends React.Component {
                 <a href='https://github.com/diennguyenduy'>Dien Nguyen Duy</a>
               </span>
               &nbsp;&nbsp;&nbsp;
-              <span>
-                Powered By{' '}
-                <a href='https://github.com/justadudewhohacks/face-api.js'>
-                  face-api.js
-                </a>
-              </span>
             </h3>
           </div>
         </footer>
