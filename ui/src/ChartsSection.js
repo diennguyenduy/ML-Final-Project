@@ -31,15 +31,7 @@ class ChartsSection extends Component {
     var barOption = {
       xAxis: {
         type: 'category',
-        data: [
-          'Angry',
-          'Disgusting',
-          'Fear',
-          'Happy',
-          'Sad',
-          'Surprise',
-          'Natural',
-        ],
+        data: ['Angry', 'Disgusting', 'Fear', 'Happy', 'Sad', 'Surprise', 'Natural'],
       },
       yAxis: {
         type: 'value',
@@ -64,15 +56,7 @@ class ChartsSection extends Component {
       legend: {
         orient: 'vertical',
         left: 'left',
-        data: [
-          'Angry',
-          'Disgusting',
-          'Fear',
-          'Happy',
-          'Sad',
-          'Surprise',
-          'Natural',
-        ],
+        data: ['Angry', 'Disgusting', 'Fear', 'Happy', 'Sad', 'Surprise', 'Natural'],
       },
       series: [
         {

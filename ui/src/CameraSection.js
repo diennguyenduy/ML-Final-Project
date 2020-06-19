@@ -56,9 +56,7 @@ const styles = (theme) => ({
 
 function resizeCanvasAndResults(dimensions, canvas, results) {
   const { width, height } =
-    dimensions instanceof HTMLVideoElement
-      ? faceapi.getMediaDimensions(dimensions)
-      : dimensions;
+    dimensions instanceof HTMLVideoElement ? faceapi.getMediaDimensions(dimensions) : dimensions;
   canvas.width = width;
   canvas.height = height;
 
@@ -104,11 +102,9 @@ class CameraSection extends Component {
     //load models
     await faceapi.nets.ssdMobilenetv1.load('/models');
     await faceapi.loadTinyFaceDetectorModel('/models');
-    console.log('models load succ');
     //init web camera
     await this.onPlay(video);
     this.props.setLoaded();
-    console.log('camera video inited');
   }
 
   updateTimeStats(timeInMs) {
@@ -119,30 +115,19 @@ class CameraSection extends Component {
 
   resizeCanvasAndResults(dimensions, canvas, results) {
     const { width, height } =
-      dimensions instanceof HTMLVideoElement
-        ? faceapi.getMediaDimensions(dimensions)
-        : dimensions;
+      dimensions instanceof HTMLVideoElement ? faceapi.getMediaDimensions(dimensions) : dimensions;
     canvas.width = width;
     canvas.height = height;
     return faceapi.resizeResults(results, { width, height });
   }
 
   drawDetections(dimensions, canvas, detections) {
-    //console.log(resizeCanvasAndResults)
-    const resizedDetections = resizeCanvasAndResults(
-      dimensions,
-      canvas,
-      detections
-    );
+    const resizedDetections = resizeCanvasAndResults(dimensions, canvas, detections);
     faceapi.drawDetection(canvas, resizedDetections);
   }
 
   drawLandmarks(dimensions, canvas, results, withBoxes = true) {
-    const resizedResults = this.resizeCanvasAndResults(
-      dimensions,
-      canvas,
-      results
-    );
+    const resizedResults = this.resizeCanvasAndResults(dimensions, canvas, results);
 
     if (withBoxes) {
       faceapi.drawDetection(
@@ -179,15 +164,8 @@ class CameraSection extends Component {
       ? await faceDetectionTask.withFaceLandmarks()
       : await faceDetectionTask;
     this.updateTimeStats(Date.now() - ts);
-    const drawFunction = withFaceLandmarks
-      ? this.drawLandmarks
-      : this.drawDetections;
-    drawFunction(
-      videoEl,
-      document.getElementById('overlay'),
-      results,
-      withBoxes
-    );
+    const drawFunction = withFaceLandmarks ? this.drawLandmarks : this.drawDetections;
+    drawFunction(videoEl, document.getElementById('overlay'), results, withBoxes);
     setTimeout(() => this.onPlay(videoEl));
   }
 
@@ -206,7 +184,6 @@ class CameraSection extends Component {
     canvas.width = input.width;
     canvas.height = input.height;
     faceapi.drawDetection(canvas, detectionsForSize, { withScore: true });
-    //console.log(detections)
 
     if (detections.length === 0) alert('No face was captured!');
     else {
@@ -219,17 +196,7 @@ class CameraSection extends Component {
         let sourceY = detection.relativeBox.y * MEDIA_HEIGHT;
         let sourceWidth = detection.relativeBox.width * MEDIA_WIDTH;
         let sourceHeight = detection.relativeBox.height * MEDIA_HEIGHT;
-        context.drawImage(
-          image,
-          sourceX,
-          sourceY,
-          sourceWidth,
-          sourceHeight,
-          0,
-          0,
-          100,
-          100
-        );
+        context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, 100, 100);
         let splited = context.getImageData(0, 0, 100, 100);
 
         if (!this.state.localMode) {
@@ -253,17 +220,7 @@ class CameraSection extends Component {
             });
         } else {
           let tempContext = document.createElement('canvas').getContext('2d');
-          tempContext.drawImage(
-            image,
-            sourceX,
-            sourceY,
-            sourceWidth,
-            sourceHeight,
-            0,
-            0,
-            48,
-            48
-          );
+          tempContext.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, 48, 48);
           let newSpited = tempContext.getImageData(0, 0, 48, 48);
           const data = await EmotionPredict.predict(newSpited);
           this.props.updateEcharts(data);
@@ -301,13 +258,6 @@ class CameraSection extends Component {
                   videoConstraints={videoConstraints}
                 />
               </div>
-              LocalMode
-              <Switch
-                checked={this.state.localMode}
-                onChange={this.handleModelChange('localMode')}
-                value='localMode'
-                color='primary'
-              />
               <Button
                 variant='contained'
                 color='primary'
