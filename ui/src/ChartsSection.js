@@ -111,9 +111,9 @@ class ChartsSection extends Component {
             <Grid item xs={4}>
               <ReactEcharts option={pieOption} />
             </Grid>
-            <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <ReactEcharts option={barOption} />
-            </Grid>
+            </Grid> */}
           </Grid>
         </Paper>
       </div>
