@@ -4,6 +4,12 @@ import ChartsSection from './ChartsSection';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import UIfx from 'uifx';
+import happy from './sounds/happy.mp3';
+import sad from './sounds/sad.mp3';
+import surprise from './sounds/surprise.mp3';
+import fear from './sounds/fear.mp3';
+import angry from './sounds/angry.mp3';
 
 const styles = (theme) => ({
   root: {
@@ -21,6 +27,31 @@ const styles = (theme) => ({
   },
 });
 
+const angryAlert = new UIfx(angry, {
+  volume: 0.5,
+  throttleMs: 100,
+});
+
+const happyAlert = new UIfx(happy, {
+  volume: 0.5,
+  throttleMs: 100,
+});
+
+const surpriseAlert = new UIfx(surprise, {
+  volume: 0.5,
+  throttleMs: 100,
+});
+
+const sadAlert = new UIfx(sad, {
+  volume: 0.5,
+  throttleMs: 100,
+});
+
+const fearAlert = new UIfx(fear, {
+  volume: 0.5,
+  throttleMs: 100,
+});
+
 class Main extends Component {
   state = {
     echartsData: [0, 0, 0, 0, 0, 0, 0],
@@ -28,7 +59,28 @@ class Main extends Component {
   };
 
   updateEcharts(data) {
-    console.log('update echarts ,', data);
+    let emotion;
+    for (let i = 0; i < 7; i++) {
+      if (data[i] === Math.max(...data)) {
+        emotion = i;
+        break;
+      }
+    }
+    if (emotion === 0) {
+      angryAlert.play();
+    } else if (emotion === 1) {
+      // disgustAlert.play();
+      fearAlert.play();
+    } else if (emotion === 2) {
+      fearAlert.play();
+    } else if (emotion === 3) {
+      happyAlert.play();
+    } else if (emotion === 4) {
+      sadAlert.play();
+    } else if (emotion === 5) {
+      surpriseAlert.play();
+    }
+
     this.setState({ echartsData: data });
   }
 
