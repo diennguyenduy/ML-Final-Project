@@ -1,6 +1,6 @@
-# Using webcam to recognize face and emotion classification
+# Using webcam to recognize face and emotion classification and sound the notification
 
-### Dataset
+### Datasets
 
 Fer2013 on kaggle (https://www.kaggle.com/deadskull7/fer2013)
 
