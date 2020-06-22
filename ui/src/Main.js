@@ -1,16 +1,16 @@
+import UIfx from 'uifx';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import CameraSection from './CameraSection';
 import ChartsSection from './ChartsSection';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import UIfx from 'uifx';
-import happy from './sounds/happy.mp3';
 import sad from './sounds/sad.mp3';
-import surprise from './sounds/surprise.mp3';
 import fear from './sounds/fear.mp3';
 import angry from './sounds/angry.mp3';
+import happy from './sounds/happy.mp3';
 import disgust from './sounds/disgust.mp3';
+import surprise from './sounds/surprise.mp3';
 
 const styles = (theme) => ({
   root: {
