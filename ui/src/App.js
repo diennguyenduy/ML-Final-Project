@@ -28,7 +28,7 @@ class App extends React.Component {
         <AppBar position='static' color='default'>
           <Toolbar>
             <Typography variant='h6' color='inherit'>
-              Emotion Recognition
+              Recognition and Alert Customer Emotion
             </Typography>
           </Toolbar>
         </AppBar>
