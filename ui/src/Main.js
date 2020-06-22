@@ -10,6 +10,7 @@ import sad from './sounds/sad.mp3';
 import surprise from './sounds/surprise.mp3';
 import fear from './sounds/fear.mp3';
 import angry from './sounds/angry.mp3';
+import disgust from './sounds/disgust.mp3';
 
 const styles = (theme) => ({
   root: {
@@ -52,6 +53,20 @@ const fearAlert = new UIfx(fear, {
   throttleMs: 100,
 });
 
+const disgustAlert = new UIfx(disgust, {
+  volume: 0.5,
+  throttleMs: 100,
+});
+
+// function emotion(emotion) {
+//   if (this.state.emotion === emotion) {
+//     const Alert = new UIfx(emotion, {
+//       volume: 0.5,
+//       throttleMs: 100,
+//     });
+//   }
+// }
+
 class Main extends Component {
   state = {
     echartsData: [0, 0, 0, 0, 0, 0, 0],
@@ -69,8 +84,7 @@ class Main extends Component {
     if (emotion === 0) {
       angryAlert.play();
     } else if (emotion === 1) {
-      // disgustAlert.play();
-      fearAlert.play();
+      disgustAlert.play();
     } else if (emotion === 2) {
       fearAlert.play();
     } else if (emotion === 3) {
