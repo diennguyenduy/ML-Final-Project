@@ -9,7 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import EmotionPredict from './EmotionPredict';
-import Switch from '@material-ui/core/Switch';
+// import Switch from '@material-ui/core/Switch';
 
 const serverAddr = 'http://www.hellogalaxy.cn:5000';
 
@@ -69,7 +69,6 @@ class CameraSection extends Component {
     forwardTimes: [],
     localMode: true,
   };
-  //https://www.npmjs.com/package/react-webcam
   handleModelChange = (name) => (event) => {
     this.setState({ [name]: event.target.checked });
   };
@@ -244,7 +243,7 @@ class CameraSection extends Component {
         <Grid container flexGrow>
           <Grid item style={{ width: '50%' }}>
             <Paper className={classes.paper}>
-              <p>Web Camera</p>
+              <p>Live Camera</p>
               <div>
                 <canvas className={classes.overlay} id='overlay'></canvas>
                 <Webcam

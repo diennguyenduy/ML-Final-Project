@@ -3,7 +3,6 @@ import * as tf from '@tensorflow/tfjs';
 class Model {
   async init() {
     this.model = await tf.loadLayersModel('model/model.json');
-    console.log('emotion model load success', this.model);
   }
 
   async predict(pic) {
